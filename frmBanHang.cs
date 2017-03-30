@@ -492,6 +492,7 @@ namespace PMQLBH
                     Close();
                 }
                 else MainForm.ThongBao("Có lỗi trong quá trình nhập hàng!");
+
             }
         }
 
