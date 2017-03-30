@@ -40,7 +40,7 @@ namespace PMQLBH
             {
                 for (int i = 0; i < dgdDanhSachSanPham.RowCount; i++)
                 {
-                    if (KiemTraSanPham(dgdDanhSachSanPham["colSanPham", i].Value.ToString(), double.Parse(dgdDanhSachSanPham["colSoLuong", i].Value.ToString()), ulong.Parse(dgdDanhSachSanPham["colGia", i].Value.ToString(),NumberStyles.AllowThousands), dgdDanhSachSanPham["colDonViTinh", i].Value.ToString()) == false)
+                    if (KiemTraSanPham(dgdDanhSachSanPham["colSanPham", i].Value.ToString(), double.Parse(dgdDanhSachSanPham["colSoLuong", i].Value.ToString()), ulong.Parse(dgdDanhSachSanPham["colGia", i].Value.ToString(), NumberStyles.AllowThousands), dgdDanhSachSanPham["colDonViTinh", i].Value.ToString()) == false)
                     {
                         MessageBox.Show("Dữ liệu trong danh sách sản phẩm không hợp lệ");
                         return false;
@@ -179,53 +179,53 @@ namespace PMQLBH
             return true;
         }
 
-        bool KiemTraThemSanPham()
-        {
-            if (ChiSoSanPham(cobSanPham.Text) != -1)
-            {
-                dgdDanhSachSanPham.CurrentCell = dgdDanhSachSanPham.Rows[ChiSoSanPham(cobSanPham.Text)].Cells[0];
-                MessageBox.Show("Sản phẩm đã có trong danh sách, bạn có thể sửa và lưu lại thay đổi!");
-                return false;
-            }
-            if (KiemTraSanPham(cobSanPham.Text, (double)numudSoLuong.Value, ulong.Parse(txtGia.Text, NumberStyles.AllowThousands), txtDonViTinh.Text) == false)
-                return false;
-            return true;
-        }
+        //bool KiemTraThemSanPham()
+        //{
+        //    if (ChiSoSanPham(cobSanPham.Text) != -1)
+        //    {
+        //        dgdDanhSachSanPham.CurrentCell = dgdDanhSachSanPham.Rows[ChiSoSanPham(cobSanPham.Text)].Cells[0];
+        //        MessageBox.Show("Sản phẩm đã có trong danh sách, bạn có thể sửa và lưu lại thay đổi!");
+        //        return false;
+        //    }
+        //    if (KiemTraSanPham(cobSanPham.Text, (double)numudSoLuong.Value, ulong.Parse(txtGia.Text, NumberStyles.AllowThousands), txtDonViTinh.Text) == false)
+        //        return false;
+        //    return true;
+        //}
 
         void ThemSanPham()
         {
-            dgdDanhSachSanPham.Rows.Add("", cobSanPham.Text, txtDonViTinh.Text, numudSoLuong.Value.ToString("0.0"), ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands).ToString("#,0"), txtThanhTien.Text);
+            //dgdDanhSachSanPham.Rows.Add("", cobSanPham.Text, txtDonViTinh.Text, numudSoLuong.Value.ToString("0.0"), ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands).ToString("#,0"), txtThanhTien.Text);
         }
 
-        bool KiemTraLuuSanPham()
-        {
-            if (dgdDanhSachSanPham.CurrentRow == null)
-            {
-                MessageBox.Show("Bạn phải chọn một sản phẩm trước khi lưu thay đổi!");
-                return false;
-            }
-            if (QLBH.AppTonTaiSanPham(cobSanPham.Text) == false)
-            {
-                MessageBox.Show("Sản phẩm không tồn tại!");
-                return false;
-            }
-            if (dgdDanhSachSanPham.CurrentRow.Cells["colSanPham"].Value.ToString() != cobSanPham.Text)
-            {
-                MessageBox.Show("Tên sản phẩm không hợp lệ để lưu thay đổi");
-                return false;
-            }
-            if (numudSoLuong.Value == 0)
-            {
-                MessageBox.Show("Bạn chưa nhập số lượng của sản phẩm!");
-                return false;
-            }
-            if ((double)numudSoLuong.Value > QLBH.LaySoLuongHienCoCuaSanPham(QLBH.LayIdTuTenSanPham(cobSanPham.Text)))
-            {
-                MessageBox.Show("Mặt hàng hiện chỉ còn lại số lượng là " + QLBH.LaySoLuongHienCoCuaSanPham(QLBH.LayIdTuTenSanPham(cobSanPham.Text)).ToString() + " nhỏ hơn số lượng bạn đã nhập nên không thể thực hiện thao tác này!");
-                return false;
-            }
-            return true;
-        }
+        //bool KiemTraLuuSanPham()
+        //{
+        //    if (dgdDanhSachSanPham.CurrentRow == null)
+        //    {
+        //        MessageBox.Show("Bạn phải chọn một sản phẩm trước khi lưu thay đổi!");
+        //        return false;
+        //    }
+        //    if (QLBH.AppTonTaiSanPham(cobSanPham.Text) == false)
+        //    {
+        //        MessageBox.Show("Sản phẩm không tồn tại!");
+        //        return false;
+        //    }
+        //    if (dgdDanhSachSanPham.CurrentRow.Cells["colSanPham"].Value.ToString() != cobSanPham.Text)
+        //    {
+        //        MessageBox.Show("Tên sản phẩm không hợp lệ để lưu thay đổi");
+        //        return false;
+        //    }
+        //    if (numudSoLuong.Value == 0)
+        //    {
+        //        MessageBox.Show("Bạn chưa nhập số lượng của sản phẩm!");
+        //        return false;
+        //    }
+        //    if ((double)numudSoLuong.Value > QLBH.LaySoLuongHienCoCuaSanPham(QLBH.LayIdTuTenSanPham(cobSanPham.Text)))
+        //    {
+        //        MessageBox.Show("Mặt hàng hiện chỉ còn lại số lượng là " + QLBH.LaySoLuongHienCoCuaSanPham(QLBH.LayIdTuTenSanPham(cobSanPham.Text)).ToString() + " nhỏ hơn số lượng bạn đã nhập nên không thể thực hiện thao tác này!");
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         int ChiSoSanPham(string tenSanPham)
         {
@@ -258,23 +258,23 @@ namespace PMQLBH
 
         void CapNhatThanhTien()
         {
-            try
-            {
-                txtThanhTien.Text = (Math.Round(numudSoLuong.Value, 1) * ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands)).ToString("#,0");
-            }
-            catch
-            {
+            //try
+            //{
+            //    txtThanhTien.Text = (Math.Round(numudSoLuong.Value, 1) * ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands)).ToString("#,0");
+            //}
+            //catch
+            //{
 
-            }
+            //}
         }
 
         void LuuSanPham()
         {
-            dgdDanhSachSanPham.CurrentRow.Cells["colSanPham"].Value = cobSanPham.Text;
-            dgdDanhSachSanPham.CurrentRow.Cells["colSoLuong"].Value = numudSoLuong.Value.ToString("0.0");
-            dgdDanhSachSanPham.CurrentRow.Cells["colGia"].Value = ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands).ToString("#,0");
-            dgdDanhSachSanPham.CurrentRow.Cells["colDonViTinh"].Value = txtDonViTinh.Text;
-            dgdDanhSachSanPham.CurrentRow.Cells["colThanhTien"].Value = txtThanhTien.Text;
+            //dgdDanhSachSanPham.CurrentRow.Cells["colSanPham"].Value = cobSanPham.Text;
+            //dgdDanhSachSanPham.CurrentRow.Cells["colSoLuong"].Value = numudSoLuong.Value.ToString("0.0");
+            //dgdDanhSachSanPham.CurrentRow.Cells["colGia"].Value = ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands).ToString("#,0");
+            //dgdDanhSachSanPham.CurrentRow.Cells["colDonViTinh"].Value = txtDonViTinh.Text;
+            //dgdDanhSachSanPham.CurrentRow.Cells["colThanhTien"].Value = txtThanhTien.Text;
         }
 
         void CapNhatNoMoi()
@@ -342,15 +342,16 @@ namespace PMQLBH
         private void frmBanHang_Load(object sender, EventArgs e)
         {
             //CapNhatDanhSachKhachHang_XeCho_SanPham_MaSanPham();
-            cobKhachHang.DisplayMember = "ten";
-            cobKhachHang.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachKhachHang"];
-            cobSanPham.DisplayMember = "ten";
-            cobSanPham.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachSanPham"];
-            cobMaSanPham.DisplayMember = "ma";
-            cobMaSanPham.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachSanPham"];
-            cobXeCho.DisplayMember = "ten";
-            cobXeCho.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachXeCho"];
-            cobKhachHang.Select();
+            //cobKhachHang.DisplayMember = "ten";
+            //cobKhachHang.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachKhachHang"];
+            //cobSanPham.DisplayMember = "ten";
+            //cobSanPham.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachSanPham"];
+            //cobMaSanPham.DisplayMember = "ma";
+            //cobMaSanPham.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachSanPham"];
+            //cobXeCho.DisplayMember = "ten";
+            //cobXeCho.DataSource = QLBH.DataSetDanhSach.Tables["DanhSachXeCho"];
+            //cobKhachHang.Select();
+
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -361,39 +362,39 @@ namespace PMQLBH
         private void cobSanPham_TextChanged(object sender, EventArgs e)
         {
             //MessageBox.Show(QLBH.DataSetDanhSach.Tables["DanhSachSanPham"].Rows.Count.ToString());
-            if (QLBH.AppTonTaiSanPham(cobSanPham.Text))
-            {
-                txtDonViTinh.Text = QLBH.LayDonViTinhTuTenSanPham(cobSanPham.Text);
-                cobMaSanPham.Text = QLBH.LayMaSanPhamTuTenSanPham(cobSanPham.Text);
-                txtGia.Text = QLBH.LayGiaSanPhamTuTenSanPham(cobSanPham.Text).ToString();
-                numudSoLuong.Value = 0;
-                cobSanPham.BackColor = QLBH.XanhNhat;
-            }
-            else cobSanPham.BackColor = Color.White;
+            //if (QLBH.AppTonTaiSanPham(cobSanPham.Text))
+            //{
+            //    txtDonViTinh.Text = QLBH.LayDonViTinhTuTenSanPham(cobSanPham.Text);
+            //    cobMaSanPham.Text = QLBH.LayMaSanPhamTuTenSanPham(cobSanPham.Text);
+            //    txtGia.Text = QLBH.LayGiaSanPhamTuTenSanPham(cobSanPham.Text).ToString();
+            //    numudSoLuong.Value = 0;
+            //    cobSanPham.BackColor = QLBH.XanhNhat;
+            //}
+            //else cobSanPham.BackColor = Color.White;
         }
 
         private void cobSanPham_Leave(object sender, EventArgs e)
         {
-            if (QLBH.AppTonTaiSanPham(cobSanPham.Text))
-                cobSanPham.BackColor = QLBH.XanhNhat;
-            else cobSanPham.BackColor = QLBH.DoNhat;
+            //if (QLBH.AppTonTaiSanPham(cobSanPham.Text))
+            //    cobSanPham.BackColor = QLBH.XanhNhat;
+            //else cobSanPham.BackColor = QLBH.DoNhat;
         }
 
         private void cobMaSanPham_TextChanged(object sender, EventArgs e)
         {
-            if (QLBH.AppTonTaiMaSanPham(cobMaSanPham.Text))
-            {
-                cobSanPham.Text = QLBH.LayTenSanPhamTuMaSanPham(cobMaSanPham.Text);
-                cobMaSanPham.BackColor = QLBH.XanhNhat;
-            }
-            else cobMaSanPham.BackColor = Color.White;
+            //if (QLBH.AppTonTaiMaSanPham(cobMaSanPham.Text))
+            //{
+            //    cobSanPham.Text = QLBH.LayTenSanPhamTuMaSanPham(cobMaSanPham.Text);
+            //    cobMaSanPham.BackColor = QLBH.XanhNhat;
+            //}
+            //else cobMaSanPham.BackColor = Color.White;
         }
 
         private void cobMaSanPham_Leave(object sender, EventArgs e)
         {
-            if (QLBH.AppTonTaiMaSanPham(cobMaSanPham.Text))
-                cobMaSanPham.BackColor = QLBH.XanhNhat;
-            else cobMaSanPham.BackColor = QLBH.DoNhat;
+            //if (QLBH.AppTonTaiMaSanPham(cobMaSanPham.Text))
+            //    cobMaSanPham.BackColor = QLBH.XanhNhat;
+            //else cobMaSanPham.BackColor = QLBH.DoNhat;
         }
 
         private void numudSoLuong_ValueChanged(object sender, EventArgs e)
@@ -401,14 +402,14 @@ namespace PMQLBH
             CapNhatThanhTien();
         }
 
-        private void btnThemSanPham_Click(object sender, EventArgs e)
-        {
-            if (KiemTraThemSanPham())
-            {
-                ThemSanPham();
-                CapNhatTongThanhTien();
-            }
-        }
+        //private void btnThemSanPham_Click(object sender, EventArgs e)
+        //{
+        //    if (KiemTraThemSanPham())
+        //    {
+        //        ThemSanPham();
+        //        CapNhatTongThanhTien();
+        //    }
+        //}
 
         private void dgdDanhSachSanPham_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
@@ -435,14 +436,14 @@ namespace PMQLBH
             else MessageBox.Show("Bạn phải chọn một sản phẩm trước khi xóa!");
         }
 
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
-            if (KiemTraLuuSanPham())
-            {
-                LuuSanPham();
-                CapNhatTongThanhTien();
-            }
-        }
+        //private void btnLuu_Click(object sender, EventArgs e)
+        //{
+        //    if (KiemTraLuuSanPham())
+        //    {
+        //        LuuSanPham();
+        //        CapNhatTongThanhTien();
+        //    }
+        //}
 
         private void txtTongThanhTien_TextChanged(object sender, EventArgs e)
         {
@@ -492,7 +493,6 @@ namespace PMQLBH
                     Close();
                 }
                 else MainForm.ThongBao("Có lỗi trong quá trình nhập hàng!");
-
             }
         }
 
@@ -539,12 +539,12 @@ namespace PMQLBH
 
         private void dgdDanhSachSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgdDanhSachSanPham.CurrentRow != null)
-            {
-                cobSanPham.Text = dgdDanhSachSanPham.CurrentRow.Cells["colSanPham"].Value.ToString();
-                numudSoLuong.Value = decimal.Parse(dgdDanhSachSanPham.CurrentRow.Cells["colSoLuong"].Value.ToString());
-                txtGia.Text = ulong.Parse(dgdDanhSachSanPham.CurrentRow.Cells["colGia"].Value.ToString(), NumberStyles.AllowThousands).ToString();
-            }
+            //if (dgdDanhSachSanPham.CurrentRow != null)
+            //{
+            //    cobSanPham.Text = dgdDanhSachSanPham.CurrentRow.Cells["colSanPham"].Value.ToString();
+            //    numudSoLuong.Value = decimal.Parse(dgdDanhSachSanPham.CurrentRow.Cells["colSoLuong"].Value.ToString());
+            //    txtGia.Text = ulong.Parse(dgdDanhSachSanPham.CurrentRow.Cells["colGia"].Value.ToString(), NumberStyles.AllowThousands).ToString();
+            //}
         }
 
         private void cobKhachHang_Leave(object sender, EventArgs e)
@@ -556,7 +556,7 @@ namespace PMQLBH
 
         private void cobSanPham_Enter(object sender, EventArgs e)
         {
-            cobSanPham.BackColor = Color.White;
+            //cobSanPham.BackColor = Color.White;
         }
 
         private void cobKhachHang_Enter(object sender, EventArgs e)
@@ -566,7 +566,7 @@ namespace PMQLBH
 
         private void cobMaSanPham_Enter(object sender, EventArgs e)
         {
-            cobMaSanPham.BackColor = Color.White;
+            //cobMaSanPham.BackColor = Color.White;
         }
 
         private void cobXeCho_TextChanged(object sender, EventArgs e)
@@ -590,7 +590,7 @@ namespace PMQLBH
 
         private void cobKhachHang_TextUpdate(object sender, EventArgs e)
         {
-          //  MessageBox.Show("Run");
+            //  MessageBox.Show("Run");
         }
 
         private void lblTongThanhTien_Click(object sender, EventArgs e)
@@ -617,13 +617,85 @@ namespace PMQLBH
 
         private void txtGia_TextChanged(object sender, EventArgs e)
         {
-            ulong Gia;
-            if (ulong.TryParse(txtGia.Text, out Gia))
+            //ulong Gia;
+            //if (ulong.TryParse(txtGia.Text, out Gia))
+            //{
+            //    lblHienThiGia.Text = Gia.ToString("#,0");
+            //    CapNhatThanhTien();
+            //}
+            //else lblHienThiGia.Text = "Không hợp lệ!";
+        }
+
+        private void dgdDanhSachSanPham_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            switch (dgdDanhSachSanPham.CurrentCell.ColumnIndex)
             {
-                lblHienThiGia.Text = Gia.ToString("#,0");
-                CapNhatThanhTien();
+                case 1:     //cell thuộc col sản phẩm
+                    {
+                        var txtTenSanPham = e.Control as TextBox;
+                        var sanPhamCollection = new AutoCompleteStringCollection();
+                        sanPhamCollection.AddRange(QLBH.LayDanhSachSanPham());
+                        txtTenSanPham.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                        txtTenSanPham.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                        txtTenSanPham.AutoCompleteCustomSource = sanPhamCollection;
+                    }
+                    break;
+                case 3:   //cell thuộc col số lượng
+                    {
+                        (e.Control as TextBox).AutoCompleteMode = AutoCompleteMode.None;
+                    }
+                    break;
+                case 4: //cell thuộc col giá
+                    {
+                        (e.Control as TextBox).AutoCompleteMode = AutoCompleteMode.None;
+                    }
+                    break;
+                default:
+                    {
+                    }
+                    break;
             }
-            else lblHienThiGia.Text = "Không hợp lệ!";
+        }
+
+        private void dgdDanhSachSanPham_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int colIndex = e.ColumnIndex;
+            int rowIndex = e.RowIndex;
+            if (dgdDanhSachSanPham[colIndex, rowIndex].Value != null) //Kiểm tra sau khi edit giá trị trong cell có null hay không
+            {
+                switch (colIndex)
+                {
+                    case 1: //cell thuộc col tên sản phẩm
+                        {
+                            if (QLBH.TonTaiSanPham(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString())) // Kiểm tra tên sản phẩm nhập vào hợp lệ
+                                dgdDanhSachSanPham[2, rowIndex].Value = QLBH.LayDonViTinhTuTenSanPham(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString()); //Lấy đơn vị tính và đưa thông tin vào bảng
+                        }
+                        break;
+                    case 3: //cell thuộc col số lượng
+                        {
+                            double soLuong;
+                            if (double.TryParse(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString(),out soLuong)) // thử kiểm tra số lượng nhập vào hợp lệ
+                            {
+                                dgdDanhSachSanPham[3, rowIndex].Value = soLuong.ToString("0.0");
+                            }
+                            else
+                            {
+                                dgdDanhSachSanPham[3, rowIndex].Value = "0.0";
+                            }
+                        }
+                        break;
+                    case 4:
+                        {
+
+                        }
+                        break;
+                    default:
+                        {
+
+                        }
+                        break;
+                }
+            }
         }
     }
 }
