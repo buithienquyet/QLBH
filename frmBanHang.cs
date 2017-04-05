@@ -127,16 +127,51 @@ namespace PMQLBH
                 dgdDanhSachSanPham.Rows[i].Cells["colSTT"].Value = (i + 1).ToString();
         }
 
-        void CapNhatTongThanhTien()
+        void CapNhatThanhTien()
         {
             ulong TongThanhTien = 0;
             if (dgdDanhSachSanPham.RowCount > 0)
             {
                 for (int i = 0; i < dgdDanhSachSanPham.RowCount; i++)
-                    TongThanhTien += ulong.Parse(dgdDanhSachSanPham.Rows[i].Cells["colThanhTien"].Value.ToString(), System.Globalization.NumberStyles.AllowThousands);
+                {
+                    string thanhTien;
+                    if (dgdDanhSachSanPham.Rows[i].Cells["colThanhTien"].Value == null)
+                        continue;
+                    else
+                    {
+                        thanhTien = dgdDanhSachSanPham.Rows[i].Cells["colThanhTien"].Value.ToString();
+                    }
+                    if (thanhTien == "")
+                        continue;
+                    else if (thanhTien == "###")
+                    {
+                        txtTongThanhTien.Text = "###";
+                        break;
+                    }
+                    else
+                    {
+                        TongThanhTien += ulong.Parse(dgdDanhSachSanPham.Rows[i].Cells["colThanhTien"].Value.ToString(), System.Globalization.NumberStyles.AllowThousands);
+                    }
+                }
                 txtTongThanhTien.Text = TongThanhTien.ToString("#,0");
             }
-            else txtTongThanhTien.Text = "0";
+            else txtTongThanhTien.Text = "###";
+        }
+
+        void CapNhatThanhTienTrongDSSanPham(int row)
+        {
+            if (row >= dgdDanhSachSanPham.Rows.Count)
+                MessageBox.Show("Lỗi!");
+            try
+            {
+                double soLuong = double.Parse(dgdDanhSachSanPham[3, row].Value.ToString());
+                ulong gia = ulong.Parse(dgdDanhSachSanPham[4, row].Value.ToString());
+                dgdDanhSachSanPham[5, row].Value = (soLuong * gia).ToString("#,0");
+            }
+            catch
+            {
+                dgdDanhSachSanPham[5, row].Value = "###";
+            }
         }
 
         void CapNhatNhanThanhToan() //Cập nhật nhãn thanh toán
@@ -255,27 +290,6 @@ namespace PMQLBH
         //        cobXeCho.Items.Add(XeCho);
         //    }
         //}
-
-        void CapNhatThanhTien()
-        {
-            //try
-            //{
-            //    txtThanhTien.Text = (Math.Round(numudSoLuong.Value, 1) * ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands)).ToString("#,0");
-            //}
-            //catch
-            //{
-
-            //}
-        }
-
-        void LuuSanPham()
-        {
-            //dgdDanhSachSanPham.CurrentRow.Cells["colSanPham"].Value = cobSanPham.Text;
-            //dgdDanhSachSanPham.CurrentRow.Cells["colSoLuong"].Value = numudSoLuong.Value.ToString("0.0");
-            //dgdDanhSachSanPham.CurrentRow.Cells["colGia"].Value = ulong.Parse(txtGia.Text, System.Globalization.NumberStyles.AllowThousands).ToString("#,0");
-            //dgdDanhSachSanPham.CurrentRow.Cells["colDonViTinh"].Value = txtDonViTinh.Text;
-            //dgdDanhSachSanPham.CurrentRow.Cells["colThanhTien"].Value = txtThanhTien.Text;
-        }
 
         void CapNhatNoMoi()
         {
@@ -426,15 +440,7 @@ namespace PMQLBH
             CapNhatSTTTrongDSSanPham();
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            if (dgdDanhSachSanPham.CurrentRow != null)
-            {
-                dgdDanhSachSanPham.Rows.Remove(dgdDanhSachSanPham.CurrentRow);
-                CapNhatTongThanhTien();
-            }
-            else MessageBox.Show("Bạn phải chọn một sản phẩm trước khi xóa!");
-        }
+
 
         //private void btnLuu_Click(object sender, EventArgs e)
         //{
@@ -652,6 +658,7 @@ namespace PMQLBH
                     break;
                 default:
                     {
+
                     }
                     break;
             }
@@ -668,15 +675,45 @@ namespace PMQLBH
                     case 1: //cell thuộc col tên sản phẩm
                         {
                             if (QLBH.TonTaiSanPham(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString())) // Kiểm tra tên sản phẩm nhập vào hợp lệ
+                            {
                                 dgdDanhSachSanPham[2, rowIndex].Value = QLBH.LayDonViTinhTuTenSanPham(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString()); //Lấy đơn vị tính và đưa thông tin vào bảng
+                                dgdDanhSachSanPham[3, rowIndex].Value = "";
+                                dgdDanhSachSanPham[4, rowIndex].Value = "";
+                            }
+                            else
+                            {
+                                dgdDanhSachSanPham[colIndex, rowIndex].Value = "###";
+                                dgdDanhSachSanPham[2, rowIndex].Value = "###";
+                            }
                         }
                         break;
                     case 3: //cell thuộc col số lượng
                         {
                             double soLuong;
-                            if (double.TryParse(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString(),out soLuong)) // thử kiểm tra số lượng nhập vào hợp lệ
+                            double soLuongHienCoCuaSanPham;
+                            string tenSanPham;
+                            if (double.TryParse(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString(), out soLuong)) // thử kiểm tra số lượng nhập vào hợp lệ
                             {
-                                dgdDanhSachSanPham[3, rowIndex].Value = soLuong.ToString("0.0");
+                                tenSanPham = dgdDanhSachSanPham[1, rowIndex].Value.ToString();
+                                if (QLBH.TonTaiSanPham(tenSanPham)) //Kiểm tra sự tồn tại của sản phẩm
+                                {
+                                    soLuongHienCoCuaSanPham = QLBH.LaySoLuongHienCoCuaSanPham(QLBH.LayIdTuTenSanPham(tenSanPham));
+                                    dgdDanhSachSanPham[3, rowIndex].Value = soLuong.ToString("0.0");
+                                    if (soLuong > soLuongHienCoCuaSanPham) //Kiêm tra số lượng nhập có lớn hơn số lượng hiện có hay không
+                                    {
+                                        MessageBox.Show("Số lượng bạn nhập là " + soLuong.ToString() + " lớn hơn số lượng hiện có của sản phẩm là " + soLuongHienCoCuaSanPham.ToString() + Environment.NewLine + "Vui lòng kiểm tra lại!");
+                                        dgdDanhSachSanPham[3, rowIndex].Value = "0.0";
+                                    }
+                                    else
+                                    {
+                                        dgdDanhSachSanPham[3, rowIndex].Value = soLuong.ToString("0.0");
+                                    }
+                                }
+                                else //Sản phẩm không tồn tại
+                                {
+                                    MessageBox.Show("Sản phẩm không tồn tại!");
+                                    dgdDanhSachSanPham[3, rowIndex].Value = "0.0";
+                                }
                             }
                             else
                             {
@@ -684,9 +721,17 @@ namespace PMQLBH
                             }
                         }
                         break;
-                    case 4:
+                    case 4: //cell thuộc col giá
                         {
-
+                            ulong gia;
+                            if (ulong.TryParse(dgdDanhSachSanPham[colIndex, rowIndex].Value.ToString(), out gia))
+                            {
+                                dgdDanhSachSanPham[colIndex, rowIndex].Value = gia.ToString();
+                            }
+                            else
+                            {
+                                dgdDanhSachSanPham[colIndex, rowIndex].Value = "0";
+                            }
                         }
                         break;
                     default:
@@ -695,6 +740,8 @@ namespace PMQLBH
                         }
                         break;
                 }
+                CapNhatThanhTienTrongDSSanPham(rowIndex);
+                CapNhatThanhTien();
             }
         }
     }

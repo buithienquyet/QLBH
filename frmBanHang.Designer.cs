@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBanHang));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,6 +54,12 @@
             this.lblNhaPhanPhoi = new System.Windows.Forms.Label();
             this.cobKhachHang = new System.Windows.Forms.ComboBox();
             this.dgdDanhSachSanPham = new System.Windows.Forms.DataGridView();
+            this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSanPham = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDonViTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtNoCu = new System.Windows.Forms.TextBox();
             this.lblNoCu = new System.Windows.Forms.Label();
             this.txtTongNo = new System.Windows.Forms.TextBox();
@@ -67,13 +74,10 @@
             this.txtBocVac = new System.Windows.Forms.TextBox();
             this.txtTongThanhTienCongChoBocVac = new System.Windows.Forms.TextBox();
             this.lblTongThanhTienCongChoBocVac = new System.Windows.Forms.Label();
-            this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSanPham = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDonViTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgdDanhSachSanPham)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnThanhToanToanBo
@@ -280,6 +284,7 @@
             this.colSoLuong,
             this.colGia,
             this.colThanhTien});
+            this.dgdDanhSachSanPham.ContextMenuStrip = this.contextMenuStrip1;
             this.dgdDanhSachSanPham.EnableHeadersVisualStyles = false;
             this.dgdDanhSachSanPham.Location = new System.Drawing.Point(15, 40);
             this.dgdDanhSachSanPham.MultiSelect = false;
@@ -306,6 +311,53 @@
             this.dgdDanhSachSanPham.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgdDanhSachSanPham_RowsAdded);
             this.dgdDanhSachSanPham.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgdDanhSachSanPham_RowsRemoved);
             this.dgdDanhSachSanPham.Sorted += new System.EventHandler(this.dgdDanhSachSanPham_Sorted);
+            // 
+            // colSTT
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colSTT.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colSTT.HeaderText = "STT";
+            this.colSTT.Name = "colSTT";
+            this.colSTT.ReadOnly = true;
+            this.colSTT.Width = 72;
+            // 
+            // colSanPham
+            // 
+            this.colSanPham.HeaderText = "Sản phẩm                                      ";
+            this.colSanPham.Name = "colSanPham";
+            this.colSanPham.Width = 310;
+            // 
+            // colDonViTinh
+            // 
+            this.colDonViTinh.HeaderText = "Đơn vị tính                ";
+            this.colDonViTinh.Name = "colDonViTinh";
+            this.colDonViTinh.ReadOnly = true;
+            this.colDonViTinh.Width = 205;
+            // 
+            // colSoLuong
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colSoLuong.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colSoLuong.HeaderText = "Số lượng          ";
+            this.colSoLuong.Name = "colSoLuong";
+            this.colSoLuong.Width = 164;
+            // 
+            // colGia
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colGia.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colGia.HeaderText = "Giá                          ";
+            this.colGia.Name = "colGia";
+            this.colGia.Width = 194;
+            // 
+            // colThanhTien
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colThanhTien.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colThanhTien.HeaderText = "Thành tiền                 ";
+            this.colThanhTien.Name = "colThanhTien";
+            this.colThanhTien.ReadOnly = true;
+            this.colThanhTien.Width = 207;
             // 
             // txtNoCu
             // 
@@ -473,52 +525,19 @@
             this.lblTongThanhTienCongChoBocVac.TabIndex = 84;
             this.lblTongThanhTienCongChoBocVac.Text = "Tổng thành tiền:";
             // 
-            // colSTT
+            // contextMenuStrip1
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colSTT.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colSTT.HeaderText = "STT";
-            this.colSTT.Name = "colSTT";
-            this.colSTT.ReadOnly = true;
-            this.colSTT.Width = 72;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
             // 
-            // colSanPham
+            // toolStripMenuItem1
             // 
-            this.colSanPham.HeaderText = "Sản phẩm                                      ";
-            this.colSanPham.Name = "colSanPham";
-            this.colSanPham.Width = 310;
-            // 
-            // colDonViTinh
-            // 
-            this.colDonViTinh.HeaderText = "Đơn vị tính                ";
-            this.colDonViTinh.Name = "colDonViTinh";
-            this.colDonViTinh.ReadOnly = true;
-            this.colDonViTinh.Width = 205;
-            // 
-            // colSoLuong
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colSoLuong.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colSoLuong.HeaderText = "Số lượng          ";
-            this.colSoLuong.Name = "colSoLuong";
-            this.colSoLuong.Width = 164;
-            // 
-            // colGia
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colGia.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colGia.HeaderText = "Giá                          ";
-            this.colGia.Name = "colGia";
-            this.colGia.Width = 194;
-            // 
-            // colThanhTien
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colThanhTien.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colThanhTien.HeaderText = "Thành tiền                 ";
-            this.colThanhTien.Name = "colThanhTien";
-            this.colThanhTien.ReadOnly = true;
-            this.colThanhTien.Width = 207;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem1.Text = "Xóa sản phẩm";
             // 
             // frmBanHang
             // 
@@ -562,6 +581,7 @@
             this.Text = "Bán hàng";
             this.Load += new System.EventHandler(this.frmBanHang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgdDanhSachSanPham)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -605,5 +625,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGia;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThanhTien;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
